@@ -9,7 +9,7 @@ export class TribesController {
   ) { }
 
   @Get('/:id')
-  async getTribe(@Param('id') id: string): Promise<TribeDto> {
-    return this.tribesService.getTribe(id);
+  async getReposByTribeId(@Param('id') id: string): Promise<TribeDto> {
+    return this.tribesService.getReposByTribeId(id);
   }
 }

@@ -19,7 +19,7 @@ export class TribesService {
     private readonly repoRepository: Repository<Repo>,
   ) { }
 
-  async getTribe(id: string): Promise<TribeDto> {
+  async getReposByTribeId(id: string): Promise<TribeDto> {
     let tribe = await this.tribeRepository.createQueryBuilder("tribe")
       .leftJoinAndSelect("tribe.repos", "repo")
       .where("tribe.id = :id", { id })
@@ -35,7 +35,7 @@ export class TribesService {
       .leftJoinAndSelect("repo.metricId", "metric")
       .where("repo.id IN (:...ids)", { ids: reposEnableIds })
       .andWhere("metric.coverage >= :coverage", { coverage: COVERAGE })
-      .andWhere("repo.createdAt >= :date", { date: new Date() })
+      // .andWhere("repo.createdAt >= :date", { date: new Date() })
       .getMany();
 
     let tribeDto = new TribeDto();
@@ -56,7 +56,7 @@ export class TribesService {
   }
 
   getReposEnablesIds(state: string, repos: Repo[]): number[] {
-    return repos.filter(repo => repo.state === state).map(repo => repo.id);
+    return repos.filter(repo => repo.state === 'E').map(repo => repo.id);
   }
 
 }

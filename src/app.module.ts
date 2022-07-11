@@ -11,6 +11,7 @@ import { ReposModule } from './repos/repos.module';
 import { MetricsModule } from './metrics/metrics.module';
 import { Repo } from './repos/repos.entity';
 import { Metric } from './metrics/metric.entity';
+import { CsvModule } from './csv/csv.module';
 
 @Module({
   imports: [
@@ -27,7 +28,7 @@ import { Metric } from './metrics/metric.entity';
         ssl: true
       }
     }),
-    RepositoriesModule, CompaniesModule, TribesModule, ReposModule, MetricsModule],
+    RepositoriesModule, CompaniesModule, TribesModule, ReposModule, MetricsModule, CsvModule],
   controllers: [AppController],
   providers: [AppService],
 })

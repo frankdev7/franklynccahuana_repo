@@ -9,6 +9,7 @@ import { Repo } from 'src/repos/repos.entity';
 @Module({
   imports: [TypeOrmModule.forFeature([Tribe, Company, Repo])],
   providers: [TribesService],
-  controllers: [TribesController]
+  controllers: [TribesController],
+  exports: [TribesService]
 })
 export class TribesModule {}
