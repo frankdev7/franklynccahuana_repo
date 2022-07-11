@@ -71,3 +71,27 @@ Nest is an MIT-licensed open source project. It can grow thanks to the sponsors 
 ## License
 
 Nest is [MIT licensed](LICENSE).
+
+
+## DATABASE Access
+
+frank
+vtKMCCciF6pzLeleX4kMDw
+
+export DATABASE_URL="postgresql://frank:cb7UN9MvuUV5PIFi1-yAjw@free-tier14.aws-us-east-1.cockroachlabs.cloud:26257/defaultdb?sslmode=verify-full&options=--cluster%3Dwarp-coyote-3426"
+
+import { DataSource } from "typeorm";
+import { URL } from "url";
+
+const dbUrl = new URL(process.env.DATABASE_URL);
+const routingId = dbUrl.searchParams.get("options");
+dbUrl.searchParams.delete("options");
+
+export const AppDataSource = new DataSource({
+  type: "cockroachdb",
+  url: dbUrl.toString(),
+  ssl: true,
+  extra: {
+    options: routingId
+  },
+});
